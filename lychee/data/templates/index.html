@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div>
+    <div class="posts">
+        <h1 class="content-subhead">Recent Posts</h1>
+
+        {% for post in site.posts[:2] %}
+            <section class="post">
+                <header class="post-header">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <p class="post-meta">
+                    {{ post.date }}
+                    </p>
+
+                </header>
+                <div class="post-description">{{ post.content }}</div>
+            </section>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
