@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% block title %} Home {% endblock %}
 {% block content %}
-<div>
+<div class="container">
     <div class="posts">
-        <h1 class="content-subhead">Recent Posts</h1>
-
         {% for post in site.posts[:2] %}
-            <section class="post">
+            <div class="row post">
                 <header class="post-header">
                     <h2 class="post-title">{{ post.title }}</h2>
                     <p class="post-meta">
@@ -15,7 +13,7 @@
 
                 </header>
                 <div class="post-description">{{ post.content }}</div>
-            </section>
+            </div>
         {% endfor %}
     </div>
 </div>

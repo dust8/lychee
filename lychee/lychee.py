@@ -4,30 +4,11 @@ import shutil
 import sys
 from math import ceil
 from jinja2 import Environment, FileSystemLoader
-from pkg_resources import resource_string
-
 from .post import Post
 from .paginator import Paginator
 
 
-templates_page = resource_string(__name__, 'data/templates/page.html')
-templates_base = resource_string(__name__, 'data/templates/base.html')
-templates_index = resource_string(__name__, 'data/templates/index.html')
-templates_post = resource_string(__name__, 'data/templates/post.html')
-templates_about = resource_string(__name__, 'data/templates/about.html')
-static_blog = resource_string(__name__, 'data/static/blog.css')
-posts_about = resource_string(__name__, 'data/posts/2015-05-01-about.md')
-posts_index = resource_string(__name__, 'data/posts/2015-05-01-index.md')
-posts_introducing = resource_string(__name__, 'data/posts/2015-05-01-introducing-lychee.md')
-
-TEMPLATES = 'templates'
-STATIC = 'static'
-SOURCE = 'posts'
-ASSERT = 'assert'
-DESTINATION = ''
-
 EXT = ['markdown', 'mkdown', 'mkdn', 'mkd', 'md']
-NOT_CLEARN = [TEMPLATES, STATIC, SOURCE, ASSERT, 'CNAME']
 
 
 class Site:
@@ -82,63 +63,28 @@ def write_pages(env, output_path, pages):
             f.write(html)
     
 
-def generate_structure(path):
-    template_path = os.path.join(path, TEMPLATES)
-    static_path = os.path.join(path, STATIC)
-    posts_path = os.path.join(path, SOURCE)
-    output_path = os.path.join(path, DESTINATION)
-
-    if not os.path.exists(template_path):
-        os.mkdir(template_path)
-        generate_templates(template_path)
-    if not os.path.exists(static_path):
-        os.mkdir(static_path)
-        generate_static(static_path)
-    if not os.path.exists(posts_path):
-        os.mkdir(posts_path)
-        generate_posts(posts_path)
-
-
-def generate_templates(path):
-    with open(os.path.join(path, 'page.html'), 'wb') as fh:
-        fh.write(templates_page)
-    with open(os.path.join(path, 'base.html'), 'wb') as fh:
-        fh.write(templates_base)
-    with open(os.path.join(path, 'index.html'), 'wb') as fh:
-        fh.write(templates_index)
-    with open(os.path.join(path, 'post.html'), 'wb') as fh:
-        fh.write(templates_post)
-    with open(os.path.join(path, 'about.html'), 'wb') as fh:
-        fh.write(templates_about)
-
-def generate_static(path):
-    with open(os.path.join(path, 'blog.css'), 'wb') as fh:
-        fh.write(static_blog)
-
-
-def generate_posts(path):
-    with open(os.path.join(path, '2015-05-01-about.md'), 'wb') as fh:
-        fh.write(posts_about)
-    with open(os.path.join(path, '2015-05-01-index.md'), 'wb') as fh:
-        fh.write(posts_index)
-    with open(os.path.join(path, '2015-05-01-introducing-lychee.md'), 'wb') as fh:
-        fh.write(posts_introducing)
-
-
 def clearn_build(path):
-    for name in os.listdir(path):
-        if not name in NOT_CLEARN:
-            if os.path.isfile(os.path.join(path, name)):
-                os.remove(os.path.join(path, name))
-            else:
-                shutil.rmtree(os.path.join(path, name))
-    
+    if os.path.exists(os.path.join(path, 'index.html')):
+        os.remove(os.path.join(path, 'index.html'))
+    if os.path.exists(os.path.join(path, '_site')):
+        shutil.rmtree(os.path.join(path, '_site'))
+
+    os.mkdir(os.path.join(path, '_site'))
+
+def copy_static(static_path, path):
+    if os.path.exists(static_path):
+        shutil.copytree(static_path, os.path.join(path,'_site/static'))  
+
+def copy_assert(assert_path, path):
+    if os.path.exists(assert_path):
+        shutil.copytree(assert_path, os.path.join(path,'_site/assert'))  
 
 def build(path):
-    template_path = os.path.join(path, TEMPLATES)
-    static_path = os.path.join(path, STATIC)
-    posts_path = os.path.join(path, SOURCE)
-    output_path = os.path.join(path, DESTINATION)
+    template_path = os.path.join(path, '_templates')
+    static_path = os.path.join(path, '_static')
+    assert_path = os.path.join(path, '_assert')
+    posts_path = os.path.join(path, '_posts')
+    output_path = os.path.join(path, '_site')
 
     clearn_build(path)
    
@@ -176,6 +122,9 @@ def build(path):
 
     write_posts(env, output_path, posts)
     write_pages(env, output_path, site.pages)
+    
+    copy_static(static_path, path)
+    copy_assert(assert_path, path)
 
 if __name__ == '__main__':
     main()

@@ -3,8 +3,16 @@ import argparse
 import sys
 import http.server
 import socketserver
-from .lychee import generate_structure, build
+import shutil
+from .lychee import build
 
+
+_TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "_templates")
+_POSTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "_posts")
+_STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "_static")
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -16,10 +24,14 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def generate_structure(path):
+    shutil.copytree(_TEMPLATES_DIR, os.path.join(path, '_templates'))
+    shutil.copytree(_POSTS_DIR, os.path.join(path, '_posts'))
+    shutil.copytree(_STATIC_DIR, os.path.join(path, '_static'))
 
 def execute_from_command_line(argv=None):
     args = parse_args()
-
+    
     if args.new:
         path = os.path.join(os.getcwd(), args.new)
         if os.path.exists(path):
@@ -34,7 +46,7 @@ def execute_from_command_line(argv=None):
         build(path)
 
     if args.serve:
-        path = os.path.join(os.getcwd(), args.serve)
+        path = os.path.join(os.getcwd(), os.path.join(args.serve, '_site'))
         if not os.path.exists(path):
             print('=> error: the project is not exissts!')
         os.chdir(path)

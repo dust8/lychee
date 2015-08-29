@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %} {{ post.title }} {% endblock %}
 {% block content %}
-    <section class="post">
+<div class="container">
+    <div class="row post">
         <header class="post-header">
             <h2 class="post-title">{{ post.title }}</h2>
             <p class="post-meta">
@@ -10,5 +11,6 @@
 
         </header>
         <div class="post-content">{{ post.content }}</div>
-    </section>
+    </div>
+</div>
 {% endblock %}

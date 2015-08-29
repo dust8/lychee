@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> {% block title %}{% endblock %}| Lychee</title>
+        <link rel="shortcut icon" href="/static/favicon.ico">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/blog.css" />
+    </head>
+    <body>
+    <div class="wrapper">
+        <div class="header"> 
+            <div class="container">
+                <div class="row hero">
+                    <h1>Lychee's Blog</h1>
+                    <h4>I'm a static blog generator.</h4>
+                    <nav>
+                        <ul>
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="/page/1">Archive</a></li>
+                            <li><a href="/about.html">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            {% block content %}{% endblock %}          
+        </div>
+
+        <div class="footer_placeholder"></div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                Powered by <a href="https://github.com/dust8/lychee">lychee</a>  © 2015 
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
