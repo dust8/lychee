@@ -1,3 +1,0 @@
-[console_scripts]
-lychee = lychee.management:execute_from_command_line
-
