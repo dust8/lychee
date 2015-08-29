@@ -7,11 +7,8 @@ setup(
     version='0.1.6',
 
     packages=find_packages(),
-    package_data = {
-        'lychee': ['data/templates/*.*', 'data/posts/*.*', 'data/static/*.*']
-    },
+    include_package_data=True,
 
-    # installed or upgraded on the target machine
     install_requires = ['PyYAML', 'Jinja2', 'markdown'],
     
     zip_safe=False,
