@@ -23,18 +23,18 @@ Your need to install [python3](https://www.python.org/).
 ## Directory structure    
 
         my-blog
-        ├── _templates
+        ├── templates
         |   ├── base.html
         |   ├── index.html
         |   ├── about.html
         |   ├── page.html
         |   └── post.html
-        ├── _posts
+        ├── posts
         |   ├── 2015-05-01-about.md
         |   └── 2015-05-02-intrudcing-lychee.md
-        ├── _static
+        ├── static
         |   └── blog.css
-        └── _assert    
+        └── assert    
 
 
 ## Front Matter

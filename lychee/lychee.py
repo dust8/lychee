@@ -7,7 +7,14 @@ from .post import Post
 from .paginator import Paginator
 
 
+TEMPLATES = 'templates'
+STATIC = 'static'
+SOURCE = 'posts'
+ASSERT = 'assert'
+DESTINATION = ''
+
 EXT = ['markdown', 'mkdown', 'mkdn', 'mkd', 'md']
+NOT_CLEARN = [TEMPLATES, STATIC, SOURCE, ASSERT, 'CNAME']
 
 
 class Site:
@@ -63,27 +70,19 @@ def write_pages(env, output_path, pages):
     
 
 def clearn_build(path):
-    if os.path.exists(os.path.join(path, 'index.html')):
-        os.remove(os.path.join(path, 'index.html'))
-    if os.path.exists(os.path.join(path, '_site')):
-        shutil.rmtree(os.path.join(path, '_site'))
+    for name in os.listdir(path):
+        if not name in NOT_CLEARN:
+            if os.path.isfile(os.path.join(path, name)):
+                os.remove(os.path.join(path, name))
+            else:
+                shutil.rmtree(os.path.join(path, name))
 
-    os.mkdir(os.path.join(path, '_site'))
-
-def copy_static(static_path, path):
-    if os.path.exists(static_path):
-        shutil.copytree(static_path, os.path.join(path,'_site/static'))  
-
-def copy_assert(assert_path, path):
-    if os.path.exists(assert_path):
-        shutil.copytree(assert_path, os.path.join(path,'_site/assert'))  
 
 def build(path):
-    template_path = os.path.join(path, '_templates')
-    static_path = os.path.join(path, '_static')
-    assert_path = os.path.join(path, '_assert')
-    posts_path = os.path.join(path, '_posts')
-    output_path = os.path.join(path, '_site')
+    template_path = os.path.join(path, TEMPLATES)
+    static_path = os.path.join(path, STATIC)
+    posts_path = os.path.join(path, SOURCE)
+    output_path = os.path.join(path, DESTINATION)
 
     clearn_build(path)
    
@@ -121,9 +120,6 @@ def build(path):
 
     write_posts(env, output_path, posts)
     write_pages(env, output_path, site.pages)
-    
-    copy_static(static_path, path)
-    copy_assert(assert_path, path)
 
 if __name__ == '__main__':
     main()
