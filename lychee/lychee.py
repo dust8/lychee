@@ -14,7 +14,7 @@ ASSERT = 'assert'
 DESTINATION = ''
 
 EXT = ['markdown', 'mkdown', 'mkdn', 'mkd', 'md']
-NOT_CLEARN = [TEMPLATES, STATIC, SOURCE, ASSERT, 'CNAME']
+NOT_CLEARN = [TEMPLATES, STATIC, SOURCE, ASSERT, 'CNAME', '.git']
 
 
 class Site:
