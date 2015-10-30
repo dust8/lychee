@@ -16,7 +16,7 @@ Write your blog by `Markdown` formats that contains a `YAML` front matter block.
         ~ $ lychee -serve my-blog
         => Now browse to http://localhost:4000
 
-   
+
 ## Installation    
 Your need to install [python3](https://www.python.org/).
 
@@ -28,7 +28,7 @@ Your need to install [python3](https://www.python.org/).
         |   ├── base.html
         |   ├── index.html
         |   ├── about.html
-        |   ├── page.html
+        |   ├── archives.html
         |   └── post.html
         ├── posts
         |   ├── 2015-05-01-about.md

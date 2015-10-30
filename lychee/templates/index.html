@@ -2,17 +2,14 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="posts">
-        <div class="row post">
-            <header class="post-header">
-                <h2 class="post-title">{{ site.posts[0].title }}</h2>
-                <p class="post-meta">
-                {{ site.posts[0].date }}
-                </p>
-
-            </header>
-            <div class="post-description">{{ site.posts[0].content }}</div>
-        </div>
+    <div class="row post">
+        <header class="post-header">
+            <h2 class="post-title">{{ site.posts[0].title }}</h2>
+            <p class="post-meta">
+            {{ site.posts[0].date }}
+            </p>
+        </header>
+        <div class="post-description">{{ site.posts[0].content }}</div>
     </div>
 </div>
 {% endblock %}

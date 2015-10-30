@@ -4,21 +4,18 @@ from setuptools import setup, find_packages
 
 setup(
     name='lychee',
-    version='0.1.8',
+    version='0.2.0',
 
     packages=find_packages(),
     include_package_data=True,
 
     install_requires = ['PyYAML', 'Jinja2', 'markdown'],
-    
+
     zip_safe=False,
 
-    # metadata for upload to PyPI
-    author='dust8',
-    author_email='adbcdust@gmail.com',
     description="I'm Lychee. A static blog generator.",
     keywords='lychee static blog generator',
-    
+
     # could also include long_description, download_url, classifiers, etc.
     entry_points={
         'console_scripts': [

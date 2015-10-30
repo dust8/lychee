@@ -31,7 +31,7 @@ def generate_structure(path):
 
 def execute_from_command_line(argv=None):
     args = parse_args()
-    
+
     if args.new:
         path = os.path.join(os.getcwd(), args.new)
         if os.path.exists(path):
@@ -50,8 +50,10 @@ def execute_from_command_line(argv=None):
         if not os.path.exists(path):
             print('=> error: the project is not exists!')
         os.chdir(path)
-        handler = http.server.SimpleHTTPRequestHandler
-        httpd = socketserver.TCPServer(('', 4000), handler)
-        print('=> now browse to http://localhost:4000')
-        httpd.serve_forever()
-
+        try:
+            handler = http.server.SimpleHTTPRequestHandler
+            httpd = socketserver.TCPServer(('', 4000), handler)
+            print('=> now browse to http://localhost:4000')
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print('=> stop')
