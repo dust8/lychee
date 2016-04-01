@@ -1,53 +1,57 @@
-﻿# Introducing Lychee
+﻿---
+title: Introducing Lychee
+---
+`Lychee` is a new static blog generator, written in `Python3`.
 
-`Lychee` is a new static blog generator, written in `Python3`.    
-
-No more databases.     
-Write your blog by `Markdown` formats that contains a `YAML` front matter block.    
+No more databases.
+Write your blog by `Markdown` formats that contains a `YAML` front matter block.
 
 
-## Quick-start guide    
+## Quick-start guide
 
 
         ~ $ pip install lychee
-        ~ $ lychee -new my-blog
-        ~ $ lychee -build my-blog
-        ~ $ lychee -serve my-blog
+        ~ $ lychee new blog
+        ~ $ cd blog
+        ~/blog $ lychee serve
         => Now browse to http://localhost:4000
 
-   
-## Installation    
+
+## Installation
 Your need to install [python3](https://www.python.org/).
 
 
-## Directory structure    
+## Directory structure
 
-        my-blog
-        ├── templates
-        |   ├── base.html
-        |   ├── index.html
-        |   ├── about.html
-        |   ├── page.html
-        |   └── post.html
+        blog
         ├── posts
-        |   ├── 2015-05-01-about.md
-        |   └── 2015-05-02-intrudcing-lychee.md
+        │   ├── 2016-04-01-about.md
+        │   ├── 2016-04-01-archive.md
+        │   ├── 2016-04-01-index.md
+        │   └── 2016-04-01-introducing-lychee.md
         ├── static
-        |   └── blog.css
-        └── assert    
+        │   ├── normalize.css
+        │   └── style.css
+        └── themes
+            └── default
+                ├── about.html
+                ├── archive.html
+                ├── base.html
+                ├── index.html
+                └── post.html
 
 
 ## Front Matter
-MarkDown file that contains a YAML front matter block.    
+MarkDown file that contains a YAML front matter block.
 
         ---
         title: Blogging Like a Hacker
         ---
-or    
+or
 
         ---
         layout: about
         title: Blogging Like a Hacker
         ---
 
-if your file not contain layout, the default layout is post.   
+if your file not contain layout, the default layout is post.
