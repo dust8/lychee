@@ -61,8 +61,7 @@ def build(path):
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
 
-    shutil.copytree(path, output_path, ignore=shutil.ignore_patterns(
-        'posts', 'drafts', 'themes'))
+    shutil.copytree(path, output_path)
 
     posts = get_posts(posts_path)
 
