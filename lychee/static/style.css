@@ -1,0 +1,88 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  color: #34495e;
+  font-size: 15px;
+  line-height: 1.6;
+  background-color: #fff;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+}
+a, a:active {
+  color: #2c3e50;
+  text-decoration: none;
+}
+code {
+  margin: 0 2px;
+  padding: 3px 5px;
+  color: #e96900;
+  border-radius: 2px;
+  white-space: inherit;
+}
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+.header {
+  padding: 30px 0px;
+}
+.header a:hover {
+  border-bottom: 2px solid green;
+}
+.logo {
+  float: left;
+  font-size: 30px;
+}
+.nav {
+  float: right;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.nav-list-item {
+  float: left;
+  margin-left: 20px;
+}
+.post-title {
+  margin: 0.65em 0;
+  color: #2c3e50;
+  font-size: 1.5em;
+}
+.post-date {
+  color: #7f8c8d;
+  margin: 1.2em 0;
+}
+.footer {
+  margin: 4em 0;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+.archive {
+  max-width: 500px;
+  margin: 5em auto;
+}
+.archive .post-item {
+  padding: 2px 0 0 50px;
+}
+.archive .post-date {
+  float: left;
+  width: 125px;
+  margin: 0;
+}
+.archive .post-title-link {
+  display: block;
+  margin-left: 125px;
+  color: #42b983;
+  font-size: 1rem;
+}
+.archive a:hover {
+  color: #606872;
+}
+@media screen and (min-width: 700px) {
+  body {
+    width: 600px;
+    margin: 0 auto;
+  }
+}

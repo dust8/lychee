@@ -1,3 +1,3 @@
-recursive-include lychee/templates *
-recursive-include lychee/posts *
+recursive-include lychee/themes *
 recursive-include lychee/static *
+recursive-include lychee/posts *

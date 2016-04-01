@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %} blog {% endblock %}
+{% block content %}
+<div class="post">
+  <h2 class="post-title"><a href="{{ site.posts[0].url }}">{{ site.posts[0].title }}</a></h2>
+  <div class="post-date">{{ site.posts[0].date }}</div>
+  <div class="post-content">{{ site.posts[0].content }}</div>
+</div>
+{% endblock %}

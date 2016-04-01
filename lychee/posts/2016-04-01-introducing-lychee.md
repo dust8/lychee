@@ -11,9 +11,9 @@ Write your blog by `Markdown` formats that contains a `YAML` front matter block.
 
 
         ~ $ pip install lychee
-        ~ $ lychee -new my-blog
-        ~ $ lychee -build my-blog
-        ~ $ lychee -serve my-blog
+        ~ $ lychee new blog
+        ~ $ cd blog
+        ~/blog $ lychee serve
         => Now browse to http://localhost:4000
 
 
@@ -23,19 +23,22 @@ Your need to install [python3](https://www.python.org/).
 
 ## Directory structure    
 
-        my-blog
-        ├── templates
-        |   ├── base.html
-        |   ├── index.html
-        |   ├── about.html
-        |   ├── archives.html
-        |   └── post.html
+        blog
         ├── posts
-        |   ├── 2015-05-01-about.md
-        |   └── 2015-05-02-intrudcing-lychee.md
+        │   ├── 2016-04-01-about.md
+        │   ├── 2016-04-01-archive.md
+        │   ├── 2016-04-01-index.md
+        │   └── 2016-04-01-introducing-lychee.md
         ├── static
-        |   └── blog.css
-        └── assert    
+        │   ├── normalize.css
+        │   └── style.css
+        └── themes
+            └── default
+                ├── about.html
+                ├── archive.html
+                ├── base.html
+                ├── index.html
+                └── post.html
 
 
 ## Front Matter

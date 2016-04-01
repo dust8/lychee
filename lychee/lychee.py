@@ -4,17 +4,16 @@ from jinja2 import Environment, FileSystemLoader
 from .post import Post
 
 
-TEMPLATES = 'templates'
-STATIC = 'static'
+TEMPLATES = 'themes'
 SOURCE = 'posts'
-ASSERT = 'assert'
-DESTINATION = ''
+DRAFTS = 'drafts'
+DESTINATION = '_site'
 
 EXT = ['markdown', 'mkdown', 'mkdn', 'mkd', 'md']
-NOT_CLEARN = [TEMPLATES, STATIC, SOURCE, ASSERT, 'CNAME', '.git']
 
 
 class Site:
+
     def __init__(self):
         self.posts = []
         self.pages = []
@@ -35,7 +34,7 @@ def get_posts(path):
 
 def write_posts(env, output_path, posts):
     for post in posts:
-        template = env.get_template(post.layout+'.html')
+        template = env.get_template(post.layout + '.html')
         html = template.render(post=post)
         path = output_path
 
@@ -45,31 +44,25 @@ def write_posts(env, output_path, posts):
                 if not os.path.exists(path):
                     os.mkdir(path)
 
-            with open(os.path.join(path, post.alias + '.html'),
+            with open(os.path.join(path, post.slug + '.html'),
                       'w', encoding='utf8') as f:
                 f.write(html)
         else:
-            with open(os.path.join(path, post.layout+'.html'),
+            with open(os.path.join(path, post.layout + '.html'),
                       'w', encoding='utf8') as f:
                 f.write(html)
 
 
-def clearn_build(path):
-    for name in os.listdir(path):
-        if not name in NOT_CLEARN:
-            if os.path.isfile(os.path.join(path, name)):
-                os.remove(os.path.join(path, name))
-            else:
-                shutil.rmtree(os.path.join(path, name))
-
-
 def build(path):
-    template_path = os.path.join(path, TEMPLATES)
-    static_path = os.path.join(path, STATIC)
+    template_path = os.path.join(os.path.join(path, TEMPLATES), 'default')
     posts_path = os.path.join(path, SOURCE)
     output_path = os.path.join(path, DESTINATION)
 
-    clearn_build(path)
+    if os.path.exists(output_path):
+        shutil.rmtree(output_path)
+
+    shutil.copytree(path, output_path, ignore=shutil.ignore_patterns(
+        'posts', 'drafts', 'themes'))
 
     posts = get_posts(posts_path)
 
@@ -81,7 +74,3 @@ def build(path):
     env.globals['site'] = site
 
     write_posts(env, output_path, posts)
-
-
-if __name__ == '__main__':
-    main()
