@@ -1,6 +1,3 @@
-﻿---
-title: Introducing Lychee
----
 `Lychee` is a new static blog generator, written in `Python3`.
 
 No more databases.
